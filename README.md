@@ -1,3 +1,5 @@
+#### Issue: https://github.com/expo/expo/issues/26757
+
 There are two ways for displaying modals with expo router. The first is with a modal screen, the other is as an inline modal.
 
 There is a difference in behaviour when sliding down to dismiss the inline modal when compared to the routable screen. The inline modal will only scroll down a certain way whereas the routable screen scrolls the full length of the screen.
