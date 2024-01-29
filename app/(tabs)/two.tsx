@@ -1,16 +1,50 @@
-import { StyleSheet } from 'react-native';
+import { Modal, Pressable, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import { Text, View } from '@/components/Themed'
+import { FC, useState } from 'react'
+
+interface EP {
+  isVisible: boolean
+  onClose: () => void
+}
+
+const Picker: FC<EP> = ({ isVisible, onClose }) => (
+  <Modal
+    presentationStyle='formSheet'
+    animationType='slide'
+    transparent={false}
+    visible={isVisible}
+    onRequestClose={onClose}
+  >
+    <View style={{ backgroundColor: 'green', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Pressable onPress={onClose}>
+        <Text>Close modal</Text>
+      </Pressable>
+    </View>
+  </Modal>
+)
 
 export default function TabTwoScreen() {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <Pressable
+        onPress={() => {
+          setIsModalVisible(true)
+        }}
+      >
+        <Text>Open inline modal</Text>
+      </Pressable>
+
+      <Picker
+        isVisible={isModalVisible}
+        onClose={() => {
+          setIsModalVisible(false)
+        }}
+      />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
